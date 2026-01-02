@@ -1,0 +1,669 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Foodie Hub | Premium Dining</title>
+
+    <!-- Bootstrap CDN -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <!-- Google Fonts -->
+    <link
+        href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700&family=Playfair+Display:wght@700&display=swap"
+        rel="stylesheet">
+
+    <!-- Custom CSS -->
+    <style>
+        :root {
+            --primary-color: #ff6b00;
+            --secondary-color: #ff9d00;
+            --dark-color: #0c0b09;
+            --light-color: #f8f9fa;
+            --accent-color: #d9534f;
+        }
+
+        body {
+            font-family: 'Outfit', sans-serif;
+            background-color: var(--dark-color);
+            color: white;
+            overflow-x: hidden;
+        }
+
+        h1,
+        h2,
+        h3,
+        .navbar-brand {
+            font-family: 'Playfair Display', serif;
+        }
+
+        /* Navbar */
+        .navbar {
+            background: rgba(12, 11, 9, 0.95) !important;
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            padding: 15px 0;
+            transition: all 0.3s ease;
+        }
+
+        .navbar-brand {
+            font-size: 28px;
+            color: var(--primary-color) !important;
+            letter-spacing: 1px;
+        }
+
+        .nav-link {
+            font-weight: 500;
+            margin: 0 10px;
+            transition: color 0.3s;
+        }
+
+        .nav-link:hover {
+            color: var(--primary-color) !important;
+        }
+
+        /* Hero */
+        .hero {
+            background: linear-gradient(rgba(0, 0, 0, .7), rgba(0, 0, 0, .7)),
+                url('images/heroImage.png') center/cover;
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            position: relative;
+        }
+
+        .hero-content {
+            max-width: 800px;
+        }
+
+        .hero h1 {
+            font-size: 3.2rem;
+            margin-bottom: 20px;
+            line-height: 1.1;
+        }
+
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 3rem;
+            }
+        }
+
+        .btn-primary-custom {
+            background-color: var(--primary-color);
+            border: none;
+            padding: 12px 35px;
+            border-radius: 50px;
+            font-weight: 600;
+            color: white;
+            transition: all 0.3s ease;
+        }
+
+        .btn-primary-custom:hover {
+            background-color: var(--secondary-color);
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(255, 107, 0, 0.3);
+        }
+
+        /* Unified Section Spacing */
+        section {
+            padding: 100px 0;
+        }
+
+        .section-title h2 {
+            font-size: 45px;
+            margin-bottom: 15px;
+            color: var(--primary-color);
+        }
+
+        .section-subtitle {
+            color: #888;
+            margin-bottom: 50px;
+            font-size: 18px;
+        }
+
+        /* Food Cards */
+        .food-card {
+            background: #1a1814;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 20px;
+            overflow: hidden;
+            transition: all 0.4s ease;
+            height: 100%;
+        }
+
+        .food-card:hover {
+            transform: translateY(-10px);
+            border-color: var(--primary-color);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.5);
+        }
+
+        .food-card img {
+            height: 250px;
+            object-fit: cover;
+            transition: transform 0.6s ease;
+        }
+
+        .food-card:hover img {
+            transform: scale(1.1);
+        }
+
+        .card-body {
+            padding: 30px;
+        }
+
+        .food-card h5 {
+            color: #fff;
+            font-weight: 600;
+        }
+
+        .food-card .text-secondary {
+            color: #ccc !important;
+        }
+
+        .price-tag {
+            color: var(--primary-color);
+            font-size: 24px;
+            font-weight: 700;
+        }
+
+        /* Specialties */
+        .specialty-icon {
+            font-size: 50px;
+            color: var(--primary-color);
+            margin-bottom: 20px;
+        }
+
+        /* About Section */
+        #about {
+            background-color: #0c0b09;
+        }
+
+        #about img {
+            border: 10px solid rgba(255, 255, 255, 0.05);
+            border-radius: 20px;
+        }
+
+        /* Testimonials */
+        .testimonial-card {
+            background: rgba(255, 255, 255, 0.03);
+            padding: 40px;
+            border-radius: 20px;
+            border-left: 5px solid var(--primary-color);
+        }
+
+        /* Footer */
+        footer {
+            background: #000;
+            padding: 80px 0 30px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .hover-primary:hover {
+            color: var(--primary-color) !important;
+            transform: translateY(-3px);
+            transition: all 0.3s ease;
+        }
+
+        .hover-primary {
+            transition: all 0.3s ease;
+            display: inline-block;
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-dark fixed-top">
+        <div class="container">
+            <a class="navbar-brand" href="#">FOODIE <span class="text-white">HUB</span></a>
+            <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#menu">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="menu">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item"><a class="nav-link js-scroll-trigger" href="#">Home</a></li>
+                    <li class="nav-item"><a class="nav-link js-scroll-trigger" href="#about">About</a></li>
+                    <li class="nav-item"><a class="nav-link js-scroll-trigger" href="#menuFood">Menus</a></li>
+                    <li class="nav-item"><a class="nav-link js-scroll-trigger" href="#why-us">Why Us</a></li>
+                    <li class="nav-item"><a class="nav-link js-scroll-trigger" href="#contact">Contact</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script type="text/javascript">
+        $('.js-scroll-trigger').click(function () {
+            $('.navbar-collapse').collapse('hide');
+        });
+    </script>
+
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <div class="container hero-content">
+            <h1 class="text-white">Experience <span style="color: var(--primary-color);">Gourmet</span> Flavors at Your
+                Doorstep</h1>
+            <p class="lead text-white-50 mb-5">Crafting artisanal meals from fresh, locally sourced ingredients.
+                Deliciousness delivered fabulously, every single time.</p>
+            <div class="d-flex flex-wrap gap-3">
+                <a href="#menuFood" class="btn btn-primary-custom">Explore Menu</a>
+                <a href="#about" class="btn btn-outline-light px-4 py-2 rounded-pill fw-bold"
+                    style="text-decoration: none;">Our Story</a>
+            </div>
+        </div>
+    </section>
+
+
+
+    <!-- About Section -->
+    <div id="about" class="pt-5">
+        <div class="mt-5"></div>
+        <section class="py-5">
+            <div class="container">
+                <div class="row align-items-center">
+                    <div class="col-lg-6 mb-4 mb-lg-0">
+                        <img src="images/photo-1552566626-52f8b828add9.avif"
+                            alt="Our Restaurant" class="img-fluid w-100 shadow-lg">
+                    </div>
+                    <div class="col-lg-6 ps-lg-5">
+                        <div class="section-title">
+                            <h2>Our <span class="text-white">Culinary Journey</span></h2>
+                        </div>
+                        <p class="lead text-primary-color mb-4" style="color: var(--primary-color);">Where passion meets
+                            precision in every plate.</p>
+                        <p class="text-secondary mb-4">
+                            Founded in 2020, Foodie Hub started with a simple belief: that great food should be
+                            accessible,
+                            sustainable, and soulful. What began as a small kitchen experiment has grown into a
+                            community of
+                            food lovers who appreciate the art of gourmet dining.
+                        </p>
+                        <p class="text-secondary mb-4">
+                            Our chefs hand-pick ingredients daily from local farmers, ensuring that every bite you take
+                            supports the local ecosystem while delivering an explosion of flavor. from our kitchen to
+                            your
+                            table, we promise an experience that lingers.
+                        </p>
+                        <div class="row g-3">
+                            <div class="col-sm-6 text-white-50"><i class="fas fa-check-circle text-primary me-2"></i>
+                                100%
+                                Organic Produce</div>
+                            <div class="col-sm-6 text-white-50"><i class="fas fa-check-circle text-primary me-2"></i>
+                                Award-Winning Service</div>
+                            <div class="col-sm-6 text-white-50"><i class="fas fa-check-circle text-primary me-2"></i>
+                                Carbon-Neutral Delivery</div>
+                            <div class="col-sm-6 text-white-50"><i class="fas fa-check-circle text-primary me-2"></i>
+                                Personalized Menus</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+
+    
+
+    <!-- Chef's Special Feature -->
+    <div id="specials" class="pt-5">
+        <div class="mt-5"></div>
+        <section class="py-5"
+            style="background: linear-gradient(rgba(0,0,0,0.8), rgba(0,0,0,0.8)), url('https://images.unsplash.com/photo-1559339352-11d035aa65de?q=80&w=1974&auto=format&fit=crop') center/cover attachment-fixed;">
+            <div class="container">
+                <div class="row align-items-center">
+                    <div class="col-lg-6">
+                        <h6 class="text-primary-color mb-3" style="color: var(--primary-color); letter-spacing: 2px;">
+                            DISCOVER</h6>
+                        <h2 class="display-4 fw-bold mb-4">Chef's Special: Truffle Risotto</h2>
+                        <p class="lead mb-4">A masterpiece of Italian culinary art, featuring Arborio rice infused with
+                            authentic black truffles and aged Parmesan.</p>
+                        <div class="d-flex align-items-center gap-4 mb-5">
+                            <div class="text-center">
+                                <h3 class="mb-0 text-primary-color" style="color: var(--primary-color);">₹850</h3>
+                                <small class="text-white-50">Limited Time</small>
+                            </div>
+                            <div class="vr bg-secondary opacity-50" style="height: 40px;"></div>
+                            <p class="mb-0 text-secondary">Served with toasted garlic brioche and a glass of signature
+                                mocktail.</p>
+                        </div>
+                        <button class="btn btn-primary-custom">Order Special Now</button>
+                    </div>
+                    <div class="col-lg-6 mt-5 mt-lg-0">
+                        <div class="position-relative">
+                            <img src="images/photo-1476124369491-e7addf5db371.avif"
+                                class="img-fluid rounded-4 shadow-lg" alt="Special Dish">
+                            <div class="position-absolute top-0 start-0 m-4 badge bg-primary px-3 py-2 rounded-pill">
+                                Chef's
+                                Choice</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+    <!-- Menu Section -->
+    <div id="menuFood" class="pt-5">
+        <div class="mt-3"></div>
+        <section class="py-5" style="background-color: #0c0b09;">
+            <div class="container">
+                <div class="section-title text-center">
+                    <h2>Our <span class="text-white">Signature Menu</span></h2>
+                    <p class="section-subtitle">Exquisite flavors from around the world</p>
+                </div>
+
+                <!-- Category: Sizzling Appetizers -->
+                <h3 class="mb-4 d-inline-block border-start border-primary border-4 ps-3"
+                    style="color: var(--primary-color);">Sizzling Appetizers</h3>
+                <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4 mb-5">
+                    <div class="col">
+                        <div class="card food-card">
+                            <img src="images/premium_photo-1690263583116-c13c965cfcbb.avif"
+                                class="card-img-top" alt="Spring Rolls">
+                            <div class="card-body">
+                                <div class="d-flex justify-content-between align-items-center mb-2">
+                                    <h5 class="mb-0">Golden Spring Rolls</h5>
+                                    <span class="price-tag">₹180</span>
+                                </div>
+                                <p class="text-secondary mb-3">Crispy vegetable rolls served with sweet chili dip.</p>
+                                <div class="text-center">
+                                    <button class="btn btn-sm btn-outline-primary rounded-pill w-50">Add to Cart</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="card food-card">
+                            <img src="images/photo-1565299624946-b28f40a0ae38.jpg"
+                                class="card-img-top" alt="Paneer Tikka">
+                            <div class="card-body">
+                                <div class="d-flex justify-content-between align-items-center mb-2">
+                                    <h5 class="mb-0">Paneer Tikka</h5>
+                                    <span class="price-tag">₹299</span>
+                                </div>
+                                <p class="text-secondary mb-3">Clay-oven roasted cottage cheese with spices.</p>
+                                <div class="text-center">
+                                    <button class="btn btn-sm btn-outline-primary rounded-pill w-50">Add to Cart</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Adding one more for 3-col balance -->
+                    <div class="col">
+                        <div class="card food-card">
+                            <img src="images/photo-1626082927389-6cd097cdc6ec.avif"
+                                class="card-img-top" alt="Honey Chilli Potato">
+                            <div class="card-body">
+                                <div class="d-flex justify-content-between align-items-center mb-2">
+                                    <h5 class="mb-0">Honey Chilli Potato</h5>
+                                    <span class="price-tag">₹220</span>
+                                </div>
+                                <p class="text-secondary mb-3">Crispy fried potatoes tossed in sweet & spicy sauce.</p>
+                                <div class="text-center">
+                                    <button class="btn btn-sm btn-outline-primary rounded-pill w-50">Add to Cart</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Category: Main Course -->
+                <h3 class="mb-4 d-inline-block border-start border-primary border-4 ps-3"
+                    style="color: var(--primary-color);">Gourmet Mains</h3>
+                <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4 mb-5">
+                    <div class="col">
+                        <div class="card food-card">
+                            <img src="images/photo-1565299624946-b28f40a0ae38.jpg" class="card-img-top"
+                                alt="Signature Pizza">
+                            <div class="card-body">
+                                <div class="d-flex justify-content-between align-items-center mb-2">
+                                    <h5 class="mb-0">Signature Pizza</h5>
+                                    <span class="price-tag">₹490</span>
+                                </div>
+                                <p class="text-secondary mb-3">Artisanal dough topped with premium cheese and basil.</p>
+                                <div class="text-center">
+                                    <button class="btn btn-sm btn-outline-primary rounded-pill w-50">Add to Cart</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="card food-card">
+                            <img src="images/photo-1550547660-d9450f859349.jpg" class="card-img-top"
+                                alt="Classic Burger">
+                            <div class="card-body">
+                                <div class="d-flex justify-content-between align-items-center mb-2">
+                                    <h5 class="mb-0">Gourmet Burger</h5>
+                                    <span class="price-tag">₹199</span>
+                                </div>
+                                <p class="text-secondary mb-3">Double patty with melted cheddar and caramelized onions.
+                                </p>
+                                <div class="text-center">
+                                    <button class="btn btn-sm btn-outline-primary rounded-pill w-50">Add to Cart</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="card food-card">
+                            <img src="images/photo-1540189549336-e6e99c3679fe.jpg" class="card-img-top"
+                                alt="Italian Pasta">
+                            <div class="card-body">
+                                <div class="d-flex justify-content-between align-items-center mb-2">
+                                    <h5 class="mb-0">Creamy Pasta</h5>
+                                    <span class="price-tag">₹249</span>
+                                </div>
+                                <p class="text-secondary mb-3">Rich Alfredo sauce with mushroom and herbs.</p>
+                                <div class="text-center">
+                                    <button class="btn btn-sm btn-outline-primary rounded-pill w-50">Add to Cart</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Category: Chilled Beverages -->
+                <h3 class="mb-4 d-inline-block border-start border-primary border-4 ps-3"
+                    style="color: var(--primary-color);">Chilled Beverages</h3>
+                <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
+                    <div class="col">
+                        <div class="card food-card">
+                            <img src="images/photo-1513558161293-cdaf765ed2fd.avif"
+                                class="card-img-top" alt="Mint Mojito">
+                            <div class="card-body">
+                                <div class="d-flex justify-content-between align-items-center mb-2">
+                                    <h5 class="mb-0">Virgin Mint Mojito</h5>
+                                    <span class="price-tag">₹150</span>
+                                </div>
+                                <p class="text-secondary mb-3">Refreshing mint and lime with a splash of soda.</p>
+                                <div class="text-center">
+                                    <button class="btn btn-sm btn-outline-primary rounded-pill w-50">Add to Cart</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="card food-card">
+                            <img src="images/premium_photo-1722019977762-4c2db39e68bc.avif"
+                                class="card-img-top" alt="Fruit Punch">
+                            <div class="card-body">
+                                <div class="d-flex justify-content-between align-items-center mb-2">
+                                    <h5 class="mb-0">Tropical Fruit Punch</h5>
+                                    <span class="price-tag">₹180</span>
+                                </div>
+                                <p class="text-secondary mb-3">A blend of seasonal fruits topped with exotic berries.
+                                </p>
+                                <div class="text-center">
+                                    <button class="btn btn-sm btn-outline-primary rounded-pill w-50">Add to Cart</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="card food-card">
+                            <img src="images/istockphoto-123501411-612x612.webp"
+                                class="card-img-top" alt="Iced Coffee">
+                            <div class="card-body">
+                                <div class="d-flex justify-content-between align-items-center mb-2">
+                                    <h5 class="mb-0">Hazelnut Iced Coffee</h5>
+                                    <span class="price-tag">₹210</span>
+                                </div>
+                                <p class="text-secondary mb-3">Premium roasted coffee with a hint of hazelnut.</p>
+                                <div class="text-center">
+                                    <button class="btn btn-sm btn-outline-primary rounded-pill w-50">Add to Cart</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    
+
+<!-- Why Choose Us -->
+    <div id="why-us" class="pt-5 mb-5">
+        <section class="py-5">
+            <div class="container">
+                <div class="section-title text-center">
+                    <h2>Why Choose <span class="text-white">Us</span></h2>
+                    <p class="section-subtitle">The standard of excellence in every bite</p>
+                </div>
+                <div class="row g-4 text-center">
+                    <div class="col-md-4">
+                        <div class="p-4 bg-dark border border-secondary rounded-4 h-100">
+                            <i class="fas fa-utensils specialty-icon"></i>
+                            <h4>Fresh Ingredients</h4>
+                            <p class="text-secondary">We source only the finest, garden-fresh vegetables and premium
+                                meats
+                                for every dish.</p>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="p-4 bg-dark border border-secondary rounded-4 h-100">
+                            <i class="fas fa-user-tie specialty-icon"></i>
+                            <h4>Expert Chefs</h4>
+                            <p class="text-secondary">Our culinary team brings years of international experience to your
+                                favorite local flavors.</p>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="p-4 bg-dark border border-secondary rounded-4 h-100">
+                            <i class="fas fa-bolt specialty-icon"></i>
+                            <h4>Lightning Fast</h4>
+                            <p class="text-secondary">Advanced logistics ensure your food arrives steaming hot and ready
+                                to
+                                enjoy.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+
+    <!-- Contact Section -->
+    <div id="contact" class="pt-5">
+        
+        <section class="py-5">
+            <div class="container text-center">
+                <div class="section-title">
+                    <h2>Get In <span class="text-white">Touch</span></h2>
+                    <p class="section-subtitle">We'd love to hear from you</p>
+                </div>
+                <div class="row g-4 justify-content-center">
+                    <div class="col-md-3">
+                        <div class="p-3 bg-dark rounded-4 shadow-sm border border-secondary">
+                            <i class="fas fa-envelope fa-2x mb-3 text-primary" style="color: var(--primary-color);"></i>
+                            <h5>Email Us</h5>
+                            <p class="text-secondary small">foodiehub@gmail.com</p>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="p-3 bg-dark rounded-4 shadow-sm border border-secondary">
+                            <i class="fas fa-phone fa-2x mb-3 text-primary" style="color: var(--primary-color);"></i>
+                            <h5>Call Us</h5>
+                            <p class="text-secondary small">+91 98765 43210</p>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="p-3 bg-dark rounded-4 shadow-sm border border-secondary">
+                            <i class="fas fa-map-marker-alt fa-2x mb-3 text-primary"
+                                style="color: var(--primary-color);"></i>
+                            <h5>Visit Us</h5>
+                            <p class="text-secondary small">Food Street, Jaipur</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- Footer -->
+    <footer class="text-center text-secondary">
+        <div class="container">
+            <div class="mb-4">
+                <h3 class="text-white mb-3">FOODIE HUB</h3>
+                <div class="d-flex justify-content-center gap-3 fs-4">
+                    <a href="#" class="text-secondary hover-primary"><i class="fab fa-facebook"></i></a>
+                    <a href="#" class="text-secondary hover-primary"><i class="fab fa-instagram"></i></a>
+                    <a href="#" class="text-secondary hover-primary"><i class="fab fa-twitter"></i></a>
+                </div>
+            </div>
+            
+        </div>
+        <div class="container">
+            <div class="row g-4">
+                <div class="col-lg-4">
+                    
+                    <p class="text-white-50 small">Founded in 2020, Foodie Hub started with a simple belief: that great food should be accessible, sustainable, and soulful. </p>
+                    <div class="social-links mt-4">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                    </div>
+                </div>
+                <div class="col-lg-2">
+                    <h6 class="fw-bold mb-4">Quick Links</h6>
+                    <ul class="list-unstyled small">
+                        <li class="mb-2"><a href="#home" class="text-white-50 text-decoration-none">Home</a></li>
+                        <li class="mb-2"><a href="#about" class="text-white-50 text-decoration-none">About</a>
+                        </li>
+                        <li class="mb-2"><a href="#menuFood" class="text-white-50 text-decoration-none">Menus</a>
+                        </li>
+                        <li class="mb-2"><a href="#contact" class="text-white-50 text-decoration-none">Contact</a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="col-lg-2">
+                    <h6 class="fw-bold mb-4">Support</h6>
+                    <ul class="list-unstyled small">
+                        <li class="mb-2"><a href="#" class="text-white-50 text-decoration-none">Privacy Policy</a></li>
+                        <li class="mb-2"><a href="#" class="text-white-50 text-decoration-none">Terms of Service</a>
+                        </li>
+                        <li class="mb-2"><a href="#" class="text-white-50 text-decoration-none">Help Center</a></li>
+                    </ul>
+                </div>
+                <div class="col-lg-4">
+                    <h6 class="fw-bold mb-4">Newsletter</h6>
+                    <p class="text-white-50 small mb-3">Subscribe for more updates.</p>
+                    <div class="input-group">
+                        <input type="email" class="form-control" placeholder="Email address">
+                        <button class="btn btn-premium border-0" style="border-radius: 0 10px 10px 0;">Join</button>
+                    </div>
+                </div>
+            </div>
+            <hr class="border-secondary opacity-25">
+            <p class="mb-0 mt-4">&copy; 2025 FoodieHub. All rights reserved. Crafted with ❤️ for food lovers.</p>
+        </div>
+    </footer>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+
+</html>
